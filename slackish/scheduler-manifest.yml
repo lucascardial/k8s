@@ -31,13 +31,13 @@ spec:
             - name: APP_ENV
               value: "local"
             - name: APP_KEY
-              value: "SUPER_SECRET"
+              value: "base64:LgommFwdUBv7lTbv2zif2NfhXTAkTcq1mA3P8CUYpn4="
             - name: APP_DEBUG
               value: "true"
             - name: APP_LOG_LEVEL
               value: "debug"
             - name: APP_URL
-              value: "http://slackish.com:30080"
+              value: "http://myslackish.com:30080"
             - name: LOG_CHANNEL
               value: "stack"
             - name: DB_CONNECTION
@@ -73,8 +73,8 @@ spec:
             - name: PUSHER_APP_SECRET
               value: "SUPER_SECRET"
             - name: AUTH_GOOGLE_CLIENT_ID
-              value: "SUPER_SECRET"
+              value: "131544209366-9592n7od0597nrch4bf8d7m7asoc5d9a.apps.googleusercontent.com"
             - name: AUTH_GOOGLE_CLIENT_SECRET
-              value: "SUPER_SECRET"
+              value: "1xi2EGK5sZF-B_Vgk65Bo6KF"
             - name: AUTH_GOOGLE_REDIRECT
-              value: "http://slackish.com:30080/auth/google/callback"
+              value: "http://myslackish.com:30080/auth/google/callback"

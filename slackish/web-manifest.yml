@@ -1,10 +1,10 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: slackish-worker
+  name: slackish-webapp
   namespace: slackishapp
 spec:
-  replicas: 4
+  replicas: 3
   minReadySeconds: 10
   strategy:
     type: RollingUpdate
@@ -13,25 +13,23 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: slackish-worker
+      app: slackish-webapp
   template:
     metadata:
       labels:
-        app: slackish-worker
+        app: slackish-webapp
       namespace: slackishapp
     spec:
       containers:
         - image: tonysm/slackish-laravel-app:latest
           name: slackish-worker
           env:
-            - name: CONTAINER_ROLE
-              value: "queue"
             - name: APP_NAME
               value: "Slackish"
             - name: APP_ENV
               value: "local"
             - name: APP_KEY
-              value: "SUPER_SECRET"
+              value: "base64:LgommFwdUBv7lTbv2zif2NfhXTAkTcq1mA3P8CUYpn4="
             - name: APP_DEBUG
               value: "true"
             - name: APP_LOG_LEVEL
@@ -73,8 +71,8 @@ spec:
             - name: PUSHER_APP_SECRET
               value: "SUPER_SECRET"
             - name: AUTH_GOOGLE_CLIENT_ID
-              value: "SUPER_SECRET"
+              value: "131544209366-9592n7od0597nrch4bf8d7m7asoc5d9a.apps.googleusercontent.com"
             - name: AUTH_GOOGLE_CLIENT_SECRET
-              value: "SUPER_SECRET"
+              value: "1xi2EGK5sZF-B_Vgk65Bo6KF"
             - name: AUTH_GOOGLE_REDIRECT
               value: "http://myslackish.com:30080/auth/google/callback"
