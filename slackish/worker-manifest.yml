@@ -1,0 +1,80 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: slackish-worker
+  namespace: slackishapp
+spec:
+  replicas: 2
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: slackish-worker
+  template:
+    metadata:
+      labels:
+        app: slackish-worker
+      namespace: slackishapp
+    spec:
+      containers:
+        - image: tonysm/slackish-laravel-app:latest
+          name: slackish-worker
+          env:
+            - name: CONTAINER_ROLE
+              value: queue
+            - name: APP_NAME
+              value: "Slackish"
+            - name: APP_ENV
+              value: "local"
+            - name: APP_KEY
+              value: "SUPER_SECRET"
+            - name: APP_DEBUG
+              value: "true"
+            - name: APP_LOG_LEVEL
+              value: "debug"
+            - name: APP_URL
+              value: "http://myslackish.com:30080"
+            - name: LOG_CHANNEL
+              value: "stack"
+            - name: DB_CONNECTION
+              value: "mysql"
+            - name: DB_HOST
+              value: "mysql"
+            - name: DB_DATABASE
+              value: "slacksishdb"
+            - name: DB_USERNAME
+              value: "slacksishdbuser"
+            - name: DB_PASSWORD
+              value: "supersecret"
+            - name: BROADCAST_DRIVER
+              value: "pusher"
+            - name: CACHE_DRIVER
+              value: "redis"
+            - name: SESSION_DRIVER
+              value: "redis"
+            - name: SESSION_LIFETIME
+              value: "120"
+            - name: QUEUE_DRIVER
+              value: "redis"
+            - name: REDIS_HOST
+              value: "redis-svc"
+            - name: REDIS_PASSWORD
+              value: "null"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: PUSHER_APP_ID
+              value: "SUPER_SECRET"
+            - name: PUSHER_APP_KEY
+              value: "SUPER_SECRET"
+            - name: PUSHER_APP_SECRET
+              value: "SUPER_SECRET"
+            - name: AUTH_GOOGLE_CLIENT_ID
+              value: "SUPER_SECRET"
+            - name: AUTH_GOOGLE_CLIENT_SECRET
+              value: "SUPER_SECRET"
+            - name: AUTH_GOOGLE_REDIRECT
+              value: "http://myslackish.com:30080/auth/google/callback"
